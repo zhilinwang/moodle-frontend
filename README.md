@@ -17,7 +17,7 @@ Right now, Moodle has not been released for use on mobile devices. To develop Mo
 
 ## Getting Started
 
-To develop Moodle, download and install [Intel XDK](http://xdk-software.intel.com) or use your favorite mobile development environment.
+To develop Moodle, download and install [Intel XDK](http://xdk-software.intel.com) or use your favorite mobile app development environment.
 
 To test Moodle on an emulator or to deploy onto a physical mobile device, make sure you have [Cordova](http://cordova.apache.org) and [Ionic](http://ionicframework.com) installed, start a new project, and copy the contents in this repo into the www directory.
 

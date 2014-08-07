@@ -1,0 +1,223 @@
+@font-face {
+    font-family: SentyChinese;
+    src: url('font/SentyChinese.ttf');
+}
+
+@font-face {
+    font-family: TrueType;
+    src: url('font/TrueType.ttf');
+}
+
+body, .ionic-body, a, button {
+    font-family: TrueType;
+}
+
+.error {
+    color: #ef4e3a;
+}
+
+#list {
+  width: 170px;
+  margin: 30px auto;
+  font-size: 20px;
+}
+#list ol {
+  margin-top: 30px;
+}
+#list ol li {
+  text-align: left;
+  list-style: decimal;
+  margin: 10px 0px;
+}
+
+a:active {
+    color: #fff;
+}
+
+.front-page {
+    height: 100%;
+    width: 100%;
+   
+    background-position: center;
+    background-size: cover;
+}
+
+.load-page {
+    background-color: #fff;
+    margin-top: 60px;
+}
+
+#form-container {
+    margin-top: 20px;
+}
+
+/* Animation for front page */
+.well[ui-view]{
+
+}
+
+.ui-view-container {
+  position: relative;
+}
+
+.well[ui-view].ng-enter, [ui-view].ng-leave {
+    -webkit-transform: translate3d(0, 100%, 0);
+    -moz-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+}
+
+.well[ui-view].ng-enter {
+    -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 600ms;
+    -moz-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 600ms;
+    transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 600ms;
+}
+
+.well[ui-view].ng-leave {
+    -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 600ms;
+    -moz-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 600ms;
+    transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 600ms;
+}
+
+.well[ui-view].ng-enter-active{
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.load-face{
+    display: block;
+    height: 50px !important;
+    width: 50px !important;
+    position: relative;
+    top: 200px;
+    left: 130px;
+}
+
+#load-face-text {
+    font-family:SentyChinese;
+    font-size:1.5em;
+    position: absolute;
+    top: 280px;
+    left: 50px;
+}
+
+.banner {
+    height: 140px;
+    -webkit-box-shadow: inset 0 -30px 30px -10px white;
+    -moz-box-shadow: inset 0 -30px 30px -10px white;
+    box-shadow: inset 0 -30px 30px -10px white;
+}
+
+.banner.happy {
+    background-image: url('../img/green-lights.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.banner.sad {
+    background-image: url('../img/blue-lights.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.banner.angry {
+    background-image: url('../img/yellow-lights.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.banner.shy {
+    background-image: url('../img/purple-lights.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.banner-text {
+    font-family: SentyChinese;
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+.item.no-border {
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.padding-top {
+    font-family: SentyChinese;
+    position: relative;
+    padding-top: 40px;
+}
+
+.chart {
+    position: relative;
+    padding-top: 30px;
+    height: 200px;
+    width: 400px;
+}
+
+p.title-center {
+    text-align: center;
+    font-family: SentyChinese;
+    font-size: 3em;
+}
+
+p.center {
+    text-align: center;
+}
+
+.button-container {
+    margin-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+
+}
+
+.button-center {
+    display: inline-block;
+    margin: 5px 10px;
+    padding: 5px;
+}
+
+.icon-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.icon-center{
+    display: inline-block;
+    margin: 5px 10px;
+    padding: 5px;
+}
+
+.page-bottom {
+    position: sticky;
+    bottom: 0px;
+}
+
+.rec {
+    margin-top: 50px;
+    width: 270px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rec-button-container {
+    margin-top: 20px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.rec-button-center {
+    display: inline-block;
+    margin: 5px 10px;
+    padding: 5px;
+}
+
+.chart-container {
+    display: block;
+    margin-top: 20px;
+    margin: 5px 10px;
+    padding: 5px;
+}

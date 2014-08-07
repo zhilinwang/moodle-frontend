@@ -1,22 +1,9 @@
-angular.module('app', ['ionic', 'angularCharts'], function($provide) {
-    
-    $provide.factory('randomBg', function($rootScope) {
-        var randomBg = {};
-        randomBg.emitBg = function(bg) {
-            $rootScope.$broadcast(bg);
-        };
-        randomBg.onBg = function(bg, scope, func) {
-            var unbind = $rootScope.$on(bg, func);
-            scope.$on('$destroy', unbind);
-        };
-        return randomBg;
-    });
-})
+angular.module('app', ['ionic', 'angularCharts'])
 
+//INITIALIZATION
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -166,8 +153,7 @@ angular.module('app', ['ionic', 'angularCharts'], function($provide) {
     $urlRouterProvider.otherwise("/");
 })
 
-//CONTROLLERS
-            
+//CONTROLLERS       
 .controller('LogOutCtrl', function($scope, $state) {
         $scope.logout = function() {
         $.ajax({
@@ -183,8 +169,9 @@ angular.module('app', ['ionic', 'angularCharts'], function($provide) {
 
 .controller('MainCtrl', function($scope, $rootScope) {
     var images = ['background.png', 'background2.png', 'background3.png', 'background4.png', 'background5.png', 'background6.png', 'background7.png', 'background8.png', 'background9.png'];
+    // get random background each time the page is opened
     $scope.img = images[Math.floor(Math.random() * images.length)];
-    $rootScope.test = $scope.img;
+    $rootScope.randomBackground = $scope.img;
 })
 
 .controller('ButtonCtrl', function($scope, $state) {
@@ -328,12 +315,14 @@ angular.module('app', ['ionic', 'angularCharts'], function($provide) {
         if (!user.email) {
             $scope.emailReq = 'Email Required';
         }
-        //Send email
+        // send email TO BE IMPLEMENTED
     };
 })
 
 .controller('OauthCtrl', function($scope, $state, $timeout, $ionicLoading, $rootScope) {
-    $scope.img = $rootScope.test;
+    // same random background from main page
+    $scope.img = $rootScope.randomBackground;
+    // main function from cordova.oauth2.js
     $scope.oauth2_connect = function() {
         $.oauth2({
         auth_url: 'https://api.weibo.com/oauth2/authorize',       
@@ -502,6 +491,9 @@ angular.module('app', ['ionic', 'angularCharts'], function($provide) {
     };
 })
 
+/*
+ * Chart produced with animations using Angular-Charts.
+ */
 .controller('ChartCtrl', function($state, $scope, $http) {
     $scope.chartType = 'line';
     $scope.config = {
@@ -510,10 +502,9 @@ angular.module('app', ['ionic', 'angularCharts'], function($provide) {
         labels: false,
         legend: {
             display: true,
-            //could be 'left, right'
             position: 'left'
         },
-        lineLegend: 'lineEnd' // can be also 'traditional'
+        lineLegend: 'lineEnd'
     };
     $scope.data = { 
         "series": [
@@ -589,21 +580,6 @@ function getFeed() {
                         $state.go('oauth');
                     });
             }
-        }
-    });
-}
-
-/*
- * use access_token to receive uid
- */
-function get_uid() {
-    $.ajax({
-        url: "https://api.weibo.com/2/account/get_uid.json",
-        type: "GET",
-        dataType: "json",
-        data: {access_token: window.localStorage.getItem("access_token")},
-        success: function(result, textStatus, xhr) {
-            window.localStorage.setItem("uid", result.uid);
         }
     });
 }

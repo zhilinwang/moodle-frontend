@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="app">
+    
 <head>
     <meta charset="utf-8">
-    <title>WeiboMood</title>
+    <title>Moodle</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!--CSS-->
     <link href="lib/ionic/css/ionic.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
+    
+    <!--JavaScript-->
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="js/cordova.oauth2.js"></script>
@@ -17,9 +21,8 @@
     <script src="cordova.js"></script>
 
 <script>
-    
     document.addEventListener("deviceready", onDeviceReady, false);
-
+    // Check for whether logged in and authorized/connected with Weibo
     function onDeviceReady() {
         $.ajax({
             url: "http://114.215.210.127/signin/",
@@ -61,12 +64,12 @@
 
 <body>
     <ion-nav-bar class="nav-title-slide-ios7 bar-stable">
-        <ion-nav-back-button class="button-icon ion-arrow-left-c">
-        </ion-nav-back-button>
+        <ion-nav-back-button class="button-icon ion-arrow-left-c"></ion-nav-back-button>
     </ion-nav-bar>
              
     <ion-nav-view></ion-nav-view>
 
+<!-- Secondary splashscreen for loading purposes -->
 <script id="splash.html" type="text/ng-template">
     <ion-view hide-nav-bar="true">
         <ion-content scroll="false">
@@ -74,40 +77,48 @@
         </ion-content>
     </ion-view>
 </script>
-    
+
+<!-- Registration/Sign-in pages -->
 <script id="main.html" type="text/ng-template">
-<ion-view hide-nav-bar="true" class="front-page" ng-style="{'background-image':'url(img/'+img+')'}">
-    <ion-content scroll="false">
-        <div class="row">
-            <div class="col"><p class="title-center" style="margin-top:40px;">心情V</p></div>
-        </div>
-        <div id="form-container">
-            <div ui-view name="form" class="well"></div>
-        </div>
-    </ion-content>
-</ion-view>
+    <ion-view hide-nav-bar="true" class="front-page" ng-style="{'background-image':'url(img/'+img+')'}">
+        <ion-content scroll="false">
+            <div class="row">
+                <div class="col">
+                    <p class="title-center" style="margin-top:40px;">心情V</p>
+                </div>
+            </div>
+            <div id="form-container">
+                <div ui-view name="form" class="well"></div>
+            </div>
+        </ion-content>
+    </ion-view>
 </script>
     
 <script id="buttons.html" type="text/ng-template">
     <div class="center">
-    <div class="icon-container">
-        <div class="icon-center"><img src="img/happy-small.png"></div>
-        <div class="icon-center"><img src="img/cry-small.png"></div>
-    </div>
-    <div class="icon-container">
-        <div class="icon-center"><img src="img/angry-small.png"></div>
-        <div class="icon-center"><img src="img/shy-small.png"></div>
-    </div>
+        <div class="icon-container">
+            <div class="icon-center"><img src="img/happy-small.png"></div>
+            <div class="icon-center"><img src="img/cry-small.png"></div>
+        </div>
+        <div class="icon-container">
+            <div class="icon-center"><img src="img/angry-small.png"></div>
+            <div class="icon-center"><img src="img/shy-small.png"></div>
+        </div>
     </div>
     <div class="row">
-        <div class="col"><button class="button button-block button-outline button-positive" ng-click="signup()">注册</button></div>
-        <div class="col"><button class="button button-block button-outline button-positive" ng-click="signin()">登录</button></div>
+        <div class="col">
+            <button class="button button-block button-outline button-positive" ng-click="signup()">注册</button>
+        </div>
+        <div class="col">
+            <button class="button button-block button-outline button-positive" ng-click="signin()">登录</button>
+        </div>
     </div>
-    <a href="#"><p class="center">不用了，直接绑定社交账户</p></a>
+    <a href="">
+        <p class="center">不用了，直接绑定社交账户</p>
+    </a>
 </script>
     
 <script id="signup.html" type="text/ng-template">
-
     <div class="list list-inset">
         <label class="item item-input item-floating-label">
             <span class="input-label">用户名</span>
@@ -130,11 +141,9 @@
         <button nav-clear class="button button-block button-positive" ng-click="submit(signup)">注册</button>
         <p class="text-center"><a ui-sref="main.buttons" class="button button-icon icon ion-arrow-down-c"></a></p>
     </div>
-
 </script>
 
 <script id="signin.html" type="text/ng-template">
-
     <div class="list list-inset">
         <label class="item item-input item-floating-label">
             <span class="input-label">用户名</span>
@@ -153,98 +162,106 @@
         <p class="text-center"><a class="positive" ui-sref="main.forgotpassword">忘记用户名、密码</a><br>
         <a ui-sref="main.buttons" class="button button-icon icon ion-arrow-down-c"></a></p>
     </div>
-
 </script>
 
 <script id="forgot-password.html" type="text/ng-template">
-        <div class="list list-inset">
-            <li class="item">
-                <p class="text-center">请输入您的邮箱，获取您的账户信息</p>
-            </li>
-            <label class="item item-input item-floating-label">
-                <span class="input-label">邮箱</span>
-                <input type="email" ng-model="user.email" placeholder="邮箱">
-                <p ng-show="emailReq" class="help-block" style="color:#ef4e3a;">{{emailReq}}</p>
-            </label>
-        </div>
-<div class="padding">
-    <button class="button button-block button-positive" ng-click="submit(user)">Send</button>
-  <p class="text-center">返回到<a class="positive" ui-sref="main.signin">登录</a>.</p>
-</div>
-</script>
-
-<script id="oauth.html" type="text/ng-template">
-<ion-view hide-nav-bar="true" class="front-page" ng-style="{'background-image':'url(img/'+img+')'}">
-    <ion-content scroll="false" class="padding">
-        <div class="row">
-            <div class="col"><p class="title-center" style="margin-top:40px;">心情V</p></div>
-        </div>
-            <div class="button-container">
-            <div class="button-center"><img ng-click="oauth2_connect()" src="img/weibo-small.png"></div>
-            <div class="button-center"><a href="#"><img src="img/weixin-small.png"></a></div>
-            <div class="button-center"><a href="#"><img src="img/qq-small.png"></a></div>
-            </div>
-        <div class="page-bottom">
-        <a ng-controller="LogOutCtrl" class="button button-block button-assertive" ng-click="logout()">注销</a>
-        </div>
-        </ion-content>
-        </ion-view>
-</script>
-    
-<script id="loading.html" type="text/ng-template">
-<ion-view hide-nav-bar="true">
-<ion-content scroll="false">
-    <div class="load-face">
-    <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false" does-continue="true" auto-play="true" slide-interval="500">
-        <ion-slide>
-            <img src="img/happy-small.png">
-        </ion-slide>
-        <ion-slide>
-            <img src="img/cry-small.png">
-        </ion-slide>
-        <ion-slide>
-            <img src="img/shy-small.png">
-        </ion-slide>
-        <ion-slide>
-            <img src="img/angry-small.png">
-        </ion-slide>
-    </ion-slide-box>
+    <div class="list list-inset">
+        <li class="item">
+            <p class="text-center">请输入您的邮箱，获取您的账户信息</p>
+        </li>
+        <label class="item item-input item-floating-label">
+            <span class="input-label">邮箱</span>
+            <input type="email" ng-model="user.email" placeholder="邮箱">
+            <p ng-show="emailReq" class="help-block" style="color:#ef4e3a;">{{emailReq}}</p>
+        </label>
     </div>
-    <p class="text-center" id="load-face-text">正在建立您的心情DNA~</p>
-</ion-content>
-</ion-view>
+    <div class="padding">
+        <button class="button button-block button-positive" ng-click="submit(user)">Send</button>
+        <p class="text-center">返回到<a class="positive" ui-sref="main.signin">登录</a>.</p>
+    </div>
 </script>
-    
+
+<!-- OAuth2 request page -->
+<script id="oauth.html" type="text/ng-template">
+    <ion-view hide-nav-bar="true" class="front-page" ng-style="{'background-image':'url(img/'+img+')'}">
+        <ion-content scroll="false" class="padding">
+            <div class="row">
+                <div class="col">
+                    <p class="title-center" style="margin-top:40px;">心情V</p>
+                </div>
+            </div>
+            <div class="button-container">
+                <div class="button-center">
+                    <img ng-click="oauth2_connect()" src="img/weibo-small.png">
+                </div>
+                <div class="button-center">
+                    <a href="#"><img src="img/weixin-small.png"></a>
+                </div>
+                <div class="button-center">
+                    <a href="#"><img src="img/qq-small.png"></a>
+                </div>
+            </div>
+            <div class="page-bottom">
+                <a ng-controller="LogOutCtrl" class="button button-block button-assertive" ng-click="logout()">注销</a>
+            </div>
+        </ion-content>
+    </ion-view>
+</script>
+
+<!-- Loading page after authentication -->
+<script id="loading.html" type="text/ng-template">
+    <ion-view hide-nav-bar="true">
+        <ion-content scroll="false">
+            <div class="load-face">
+                <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false" does-continue="true" auto-play="true" slide-interval="500">
+                    <ion-slide>
+                        <img src="img/happy-small.png">
+                    </ion-slide>
+                    <ion-slide>
+                        <img src="img/cry-small.png">
+                    </ion-slide>
+                    <ion-slide>
+                        <img src="img/shy-small.png">
+                    </ion-slide>
+                    <ion-slide>
+                        <img src="img/angry-small.png">
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
+            <p class="text-center" id="load-face-text">正在建立您的心情DNA~</p>
+        </ion-content>
+    </ion-view>
+</script>
+
+<!-- Main pages within tabs -->
 <script id="tabs.html" type="text/ng-template">
-        <ion-tabs class="tabs-stable tabs-icon-top">
-            <ion-tab title="首页" icon-on="ion-ios7-home" icon-off="ion-ios7-home-outline" href="#/tab/home/mood">
+    <ion-tabs class="tabs-stable tabs-icon-top">
+        <ion-tab title="首页" icon-on="ion-ios7-home" icon-off="ion-ios7-home-outline" href="#/tab/home/mood">
             <ion-nav-view name="home-tab"></ion-nav-view>
-            </ion-tab>
-
-            <ion-tab title="我的" icon-on="ion-ios7-person" icon-off="ion-ios7-person-outline" href="#/tab/profile">
+        </ion-tab>
+        <ion-tab title="我的" icon-on="ion-ios7-person" icon-off="ion-ios7-person-outline" href="#/tab/profile">
             <ion-nav-view name="profile-tab"></ion-nav-view>
-            </ion-tab>
-
-            <ion-tab title="更多" icon-on="ion-ios7-settings-strong" icon-off="ion-ios7-settings" href="#/tab/more">
+        </ion-tab>
+        <ion-tab title="更多" icon-on="ion-ios7-settings-strong" icon-off="ion-ios7-settings" href="#/tab/more">
             <ion-nav-view name="more-tab"></ion-nav-view>
-            </ion-tab>
-        </ion-tabs>
-    </script>
+        </ion-tab>
+    </ion-tabs>
+</script>
 
 <script id="home.html" type="text/ng-template">
-<ion-view hide-nav-bar="true" title="首页">
-    <ion-content>
-        <ion-refresher
-            pulling-icon="ion-ios7-arrow-thin-down"
-            pulling-text="拉下刷新"
-            on-refresh="doRefresh()"
-            refreshing-text="正在刷新!"
-            refreshing-icon="ion-ios7-reloading">
-        </ion-refresher>
-        <div ui-view="mood"></div>
-        <div ui-view="rec"></div>
-    </ion-content>
-</ion-view>
+    <ion-view hide-nav-bar="true" title="首页">
+        <ion-content>
+            <ion-refresher
+                pulling-icon="ion-ios7-arrow-thin-down"
+                pulling-text="拉下刷新"
+                on-refresh="doRefresh()"
+                refreshing-text="正在刷新!"
+                refreshing-icon="ion-ios7-reloading">
+            </ion-refresher>
+            <div ui-view="mood"></div>
+            <div ui-view="rec"></div>
+        </ion-content>
+    </ion-view>
 </script>
     
 <script id="rec.html" type="text/ng-template">
@@ -253,12 +270,12 @@
     </div>
     <div id="no-more"></div>
     <div class="rec-button-container">
-    <div class="rec-button-center"><button class="button button-stable icon-left ion-sad" ng-click="getNew()">
-        不好笑，再来一个
-    </button></div>
-    <div class="rec-button-center"><button class="button button-stable icon-left ion-happy" ng-click="share()">
-        真好笑，我想分享
-    </button></div>
+        <div class="rec-button-center">
+            <button class="button button-stable icon-left ion-sad" ng-click="getNew()">不好笑，再来一个</button>
+        </div>
+        <div class="rec-button-center">
+            <button class="button button-stable icon-left ion-happy" ng-click="share()">真好笑，我想分享</button>
+        </div>
     </div>
 </script>
     
@@ -266,7 +283,7 @@
     <div ng-controller="RecCtrl">
         <label class="item item-input" ng-hide="posted">
             <textarea rows="5" resize="none" ng-model="status">{{status}}</textarea>
-        <p ng-show="posted">{{posted}}</p>
+            <p ng-show="posted">{{posted}}</p>
         </label>
     </div>
 </script>
@@ -276,15 +293,15 @@
         <div class="row">
             <div class="col">
                 <div class="banner-text">
-                <p>现在心情：</p>
-                <img ng-src="{{mood.imageUrl}}">
+                    <p>现在心情：</p>
+                    <img ng-src="{{mood.imageUrl}}">
                 </div>
             </div>
             <div class="col">
                 <p style="font-family:SentyChinese;"></p>
             </div>
         </div>
-    <p class="text-center padding-top">{{mood.message}}</p>
+        <p class="text-center padding-top">{{mood.message}}</p>
     </div>
 </script>
     
@@ -294,9 +311,8 @@
             <ion-refresher
                 pulling-icon="ion-ios7-arrow-thin-down"
                 pulling-text="拉下刷新"
-                on-refresh="doRefresh()"
                 refreshing-text="正在刷新!"
-                 refreshing-icon="ion-ios7-reloading">
+                refreshing-icon="ion-ios7-reloading">
             </ion-refresher>
             <div ui-view="chart"></div>
         </ion-content>
@@ -304,7 +320,9 @@
 </script>
 
 <script id="chart.html" type="text/ng-template">
-    <div class="chart-container"><div ac-chart="chartType" ac-data="data" ac-config="config" class='chart'></div></div>
+    <div class="chart-container">
+        <div ac-chart="chartType" ac-data="data" ac-config="config" class='chart'></div>
+    </div>
 </script>
 
 <script id="more.html" type="text/ng-template">
